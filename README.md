@@ -1,199 +1,38 @@
-# NYC Flights Weather & Delay Analysis
+# NYC Flight Delays and Weather: Join Coverage and EDA
 
-Exploratory data analysis project using the `nycflights13` dataset to analyze flight departure delays, weather conditions, and airport operational patterns across New York City airports.
+**Author:** Cameron Batts
 
-This project focuses on identifying relationships between flight delays and weather-related variables through statistical visualization and exploratory analysis in R.
+## Problem
+Explore departure-delay distributions and weather associations while documenting unmatched and missing records.
 
----
+## Approach
+Validate unique airport-hour weather keys, retain all flights in a left join, and explicitly reproduce the original weather-matched population. Compare weather plots within the original delay-over-100-minute subset.
 
-# Project Overview
+## Verified findings
+Independent checks using the Python nycflights13 data copy reproduced 336,776 flights and 26,115 weather records. The join matched 335,220 flights and left 1,556 unmatched. Among matched flights, 8,227 had missing departure delays; the observed mean was 12.635 minutes, median −2 minutes and 75th percentile 11 minutes. The severe-delay subset contains 13,287 flights.
 
-This repository contains exploratory visualizations and analyses examining:
-- departure delays
-- weather conditions
-- airport operational patterns
-- temperature relationships
-- visibility conditions
-- wind behavior
-- precipitation trends
+## Limitations
+The historical inner join omitted flights without matching weather. Missing departure delay is a cancellation proxy, not independently confirmed status here. Weather plots conditioned on delays over 100 minutes cannot identify general delay drivers or establish operational causes. No predictive model or ranked weather importance was estimated.
 
-The analysis was designed to explore how environmental and operational variables may influence departure delays across NYC airports.
+## Data
+Data are supplied by the nycflights13 R package. The independent check used the packaged Python copy for the same 2013 data; revised R code has not been executed.
 
----
+## Verification
+Counts and relevant numerical findings were checked independently in Python. R is unavailable here, so revised R code was reviewed but not parsed, executed or rendered. Historical images are retained separately from the revised workflow.
 
-# Tools & Technologies
-
-- R
-- ggplot2
-- dplyr
-- tidyr
-- nycflights13
-- Exploratory Data Analysis
-- Statistical Visualization
-
----
-
-# Analytical Focus Areas
-
-- Flight delay analysis
-- Weather impact analysis
-- Distribution analysis
-- Exploratory visualization
-- Airport operational analysis
-- Comparative analysis
-- Statistical plotting
-- Data storytelling
-
----
-
-# Key Analyses
-
-## Departure Delay Distribution
-
-Histogram analysis showing the distribution of departure delays across flights departing from NYC airports.
-
-The visualization highlights:
-- heavily right-skewed delay behavior
-- concentration of shorter delays
-- presence of extreme outliers
-
-![Departure Delay Distribution](./Images/Delays.png)
-
----
-
-## Departure Delay vs Temperature
-
-Scatterplot analysis examining the relationship between departure delays and temperature conditions.
-
-The analysis explores:
-- operational behavior across temperature ranges
-- clustering patterns
-- delay outliers
-- potential weather-related trends
-
-![Delay vs Temperature](./Images/Delay-vs-Temp.png)
-
----
-
-## Delay Analysis by Airport Origin
-
-Comparative visualization examining delay patterns across:
-- EWR
-- JFK
-- LGA
-
-The analysis helps identify airport-level operational variation and delay concentration patterns.
-
-![Delay by Airport](./Images/Color.png)
-
----
-
-## Weather Variable Distribution Grid
-
-Multi-panel histogram visualization analyzing weather variables including:
-- temperature
-- humidity
-- wind speed
-- precipitation
-- pressure
-- visibility
-- wind gusts
-
-This visualization supports broader exploratory weather analysis and environmental trend identification.
-
-![Weather Distribution Grid](./Images/Grid.png)
-
----
-
-## Binned Delay Distribution
-
-Additional histogram analysis using alternative bin sizing to better visualize departure delay concentration and long-tail behavior.
-
-![Binned Delay Distribution](./Images/Bins.png)
-
----
-
-# Key Insights
-
-- Departure delays show a strongly right-skewed distribution with significant outliers.
-- Most flights experience relatively small delays while a smaller number experience extreme operational disruptions.
-- Temperature alone does not appear to strongly predict departure delays.
-- Weather variables such as visibility, precipitation, and wind conditions demonstrate meaningful operational variability.
-- Airport-level comparisons reveal variation in delay concentration across NYC airports.
-
----
-
-# Repository Structure
-
-```text
-NYC-Flights-Analysis/
-│
-├── Data/
-│   ├── README.md
-│
-├── Images/
-│   ├── Bins.png
-│   ├── Color.png
-│   ├── Delay-vs-Temp.png
-│   ├── Delays.png
-│   └── Grid.png
-│
-├── Notebooks/
-│
-├── Reports/
-│
-└── README.md
+## Run
+Install R and Pandoc (or use RStudio), then run from the repository root:
+```r
+source("install.R")
+rmarkdown::render("Notebooks/nyc_flight_delay_analysis.Rmd")
 ```
+Dependencies are unpinned. No API key is needed for the default workflow.
 
----
+## Files
+- [R Markdown analysis](Notebooks/nyc_flight_delay_analysis.Rmd)
+- [Readable analysis](Reports/nyc_flight_delay_analysis.html)
+- [Portfolio report](https://cameron-batts.github.io/nyc_flight_delay_analysis.html)
+- [Historical PDF](Reports/NYC%20Flight%20Delay%20%26%20Anomaly%20Detection.pdf): may predate interpretation corrections.
 
-# Files
-
-| File | Description |
-|------|-------------|
-| `Images/Delays.png` | Departure delay distribution histogram |
-| `Images/Delay-vs-Temp.png` | Delay vs temperature scatterplot |
-| `Images/Color.png` | Delay comparison by airport origin |
-| `Images/Grid.png` | Weather variable distribution grid |
-| `Images/Bins.png` | Binned delay distribution visualization |
-
----
-
-# Data
-
-This project uses the `nycflights13` dataset available through the R package ecosystem.
-
-The dataset contains commercial flight information for flights departing New York City airports and includes variables related to:
-- airlines
-- departure delays
-- arrival delays
-- destinations
-- weather conditions
-- aircraft information
-
-The data was used for exploratory data analysis, statistical analysis, and visualization exercises.
-
----
-
-# Skills Demonstrated
-
-- Exploratory data analysis
-- Statistical visualization
-- R programming
-- ggplot2 visualization
-- Distribution analysis
-- Comparative analysis
-- Weather analysis
-- Operational analytics
-- Data storytelling
-
----
-
-# Author
-
-Cameron Batts
-
-GitHub: https://github.com/Cameron-Batts
-
-Portfolio: https://cameron-batts.github.io
-
+## References
+- [nycflights13 data documentation](https://nycflights13.tidyverse.org/)
