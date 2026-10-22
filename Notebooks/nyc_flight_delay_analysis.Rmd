@@ -17,10 +17,10 @@ Independent checks using the Python nycflights13 data copy reproduced 336,776 fl
 The historical inner join omitted flights without matching weather. Missing departure delay is a cancellation proxy, not independently confirmed status here. Weather plots conditioned on delays over 100 minutes cannot identify general delay drivers or establish operational causes. No predictive model or ranked weather importance was estimated.
 
 ## Data
-Data are supplied by the nycflights13 R package. The independent check used the packaged Python copy for the same 2013 data; revised R code has not been executed.
+Data are supplied by the nycflights13 R package. The independent check used the packaged Python copy for the same 2013 data; the revised R code has now been executed and rendered.
 
 ## Verification
-Counts and relevant numerical findings were checked independently in Python. R is unavailable here, so revised R code was reviewed but not parsed, executed or rendered. Historical images are retained separately from the revised workflow.
+Counts and relevant numerical findings were checked independently in Python. The revised R workflow was executed and rendered during this pass. Historical images are retained separately from the revised workflow.
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -63,3 +63,9 @@ for (v in c("temp", "dewp", "humid", "wind_speed", "wind_gust", "precip", "press
 }
 ```
 A pattern conditional on delays over 100 minutes does not estimate the probability of delay across all flights. Weak scatterplot trends do not demonstrate that operational factors caused the delays. Wind direction is circular and is omitted from straight-line trend fitting. Missing gust readings and extreme weather values require quality review before modeling.
+
+
+## Validation update - October 22, 2026
+The R workflow now executes and renders. It confirms 336,776 flights, 26,115 weather records, 335,220 matched flights and 1,556 unmatched weather rows. Matched flights contain 8,227 missing departure delays; observed mean delay is 12.635 minutes, median -2, and 13,287 flights exceed 100 minutes. The earlier Python checks agree. Restricted weather plots remain descriptive and cannot establish causes.
+
+Fresh outputs are recorded in Reports/validation_results.json. Archived source results use different preprocessing where noted.
